@@ -10,25 +10,24 @@
 // https://www.youtube.com/watch?v=FhIhUy8bZww
 
 function mergeSortedArray(arr1, m, arr2, n) {
-  let firstArrayIndex = m - 1;
-  let secondArrayIndex = n - 1;
-  let last = arr1.length - 1;
+  let first = m - 1;
+  let second = n - 1;
+  let i = m + n - 1;
 
-  while (secondArrayIndex >= 0) {
-    if (arr1[firstArrayIndex] < arr2[secondArrayIndex]) {
-      arr1[last] = arr2[secondArrayIndex];
-      last--;
-      secondArrayIndex--;
-    }
-
-    if (arr1[firstArrayIndex] >= arr2[secondArrayIndex]) {
-      arr1[last] = arr1[firstArrayIndex];
-      firstArrayIndex--;
-      last--;
+  while (second >= 0) {
+    let firstVal = nums1[first];
+    let secondVal = nums2[second];
+    if (firstVal > secondVal) {
+      nums1[i] = firstVal;
+      first--;
+      i--;
+    } else {
+      nums1[i] = secondVal;
+      i--;
+      second--;
     }
   }
-
-  console.log(arr1);
+  console.log(nums1);
 }
 
 mergeSortedArray([1,2,3,0,0,0], 3, [2,5,6], 3);
