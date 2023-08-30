@@ -1,6 +1,6 @@
-const arr1 = [1,2,3,4];
+const arr = [1,2,3,4];
 
-const output = arr1.map(each => each * 2);
+const output = arr.map((ar, index, arr) => ar * 2);
 console.log("Output 1", output);
 
 Array.prototype.myMap = function (callback) {
@@ -11,5 +11,5 @@ Array.prototype.myMap = function (callback) {
     return result;
 }
 
-const output2 = arr1.myMap(each => each * 3);
+const output2 = arr.myMap((ar, index, arr) => ar * 3);
 console.log("Output 2", output2);
