@@ -9,6 +9,8 @@
 //          this.next = (next===undefined ? null : next)
 //   }
 
+// https://www.youtube.com/watch?v=eQGn1xbt1JU
+
 function mergeTwoList(l1, l2) {
     let dummy = new ListNode(-1);
     let head = dummy;
@@ -30,5 +32,6 @@ function mergeTwoList(l1, l2) {
     if(l2) {
         dummy.next = l2;
     }
+    console.log(JSON.stringify(dummy));
     return head.next;
 }
