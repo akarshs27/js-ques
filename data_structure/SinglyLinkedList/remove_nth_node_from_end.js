@@ -34,3 +34,11 @@ function removeNthFromEnd(head, n) {
 }
 
 removeNthFromEnd([[1,2,3,4,5]], 2);
+
+// [1,2,3,4,5,6,7,8]
+// 0  1  2  3  4  5  6  7  8
+// f  f  f
+//                         f
+//                b     b.next
+
+// n = 3
