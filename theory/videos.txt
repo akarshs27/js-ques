@@ -1,0 +1,12 @@
+
+Web Vitals ( https://www.youtube.com/watch?v=NItNEiWmJdU )
+  Loading Performance - LCP (Largest Contentful Paint)
+  Input Responsiveness - FID (First Input Delay)
+  Visual Stability - CLS (Cummulative Layout Shift)
+
+  FCP occurs before LCP which occurs before FID. As such, resources required for achieving FCP 
+  should be prioritized over those required by LCP followed by those required by FID.
+
+  a) By the time FCP fires, the hero image should be available for firing LCP.
+  b) By the time LCP fires, the JavaScript (JS) should be downloaded, parsed and 
+     ready (or already executing) to unblock interaction (FID).
