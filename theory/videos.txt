@@ -10,3 +10,7 @@ Web Vitals ( https://www.youtube.com/watch?v=NItNEiWmJdU )
   a) By the time FCP fires, the hero image should be available for firing LCP.
   b) By the time LCP fires, the JavaScript (JS) should be downloaded, parsed and 
      ready (or already executing) to unblock interaction (FID).
+
+
+
+6) Improved Web Vitals metrics of the website for better experience and performance.
