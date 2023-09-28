@@ -14,3 +14,29 @@ Web Vitals ( https://www.youtube.com/watch?v=NItNEiWmJdU )
 
 
 6) Improved Web Vitals metrics of the website for better experience and performance.
+
+
+Cars24
+// You have a nested object which can have primitive types, arrays(with any type of value). You have to write a function:
+// To return whether a target value exists in object as value
+// To return the depth/level at which this value exists.
+// To return an array of paths which needs to be traversed to get this target value.
+// Note: path can be key or an index
+
+// Sample Input:
+// Output:
+// {
+// exists: true,
+// level: 3,
+// path: [key2, key4, 3]
+// }
+
+// Input Target value: ‘X’
+// Input Object:
+// {
+// key1: 'value1',
+// key2: {
+// key3: 'value2',
+// key4: [1, 2, 3, 'X'],
+// },
+// }
