@@ -1,3 +1,6 @@
+Javascript
+https://www.youtube.com/watch?v=u1e4z92ClsI
+
 
 Web Vitals ( https://www.youtube.com/watch?v=NItNEiWmJdU )
   Loading Performance - LCP (Largest Contentful Paint)
