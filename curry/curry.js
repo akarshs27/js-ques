@@ -1,12 +1,14 @@
-add(1,2)(3,4)(4,5)(1,1)() 
+function curry() {
+  let total = 0;
 
-function add(a,b) {
-    return function (c,d) {
-        if(c && d) {
-            return add(a+b+c+d,0);
-        }
-        return a + b;
-    }
+  return function (num = 0) {
+    total = total + num;
+    return total;
+  };
 }
 
-console.log(add(1,2)(3,4)(4,5)(1,1)());
+const sum = curry();
+console.log(sum(1)); // 1
+console.log(sum(2)); // 3
+console.log(sum(3)); // 6
+console.log(sum(4)); // 10
