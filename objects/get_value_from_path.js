@@ -23,9 +23,9 @@ function getValue(obj, str) {
   return value;
 }
 
-console.log(getValue(obj1, "a.b.c"));
-console.log(getValue(obj1, "a.b.c.0"));
-console.log(getValue(obj1, "a.b.c[1]"));
-console.log(getValue(obj1, ["a", "b", "c", "2"]));
-console.log(getValue(obj1, "a.b.c[3]"));
-console.log(getValue(obj1, "a.c"));
+console.log(getValue(obj1, "a.b.c")); // [1,2,3]
+console.log(getValue(obj1, "a.b.c.0")); // 1
+console.log(getValue(obj1, "a.b.c[1]")); // 2
+console.log(getValue(obj1, ["a", "b", "c", "2"])); // 3
+console.log(getValue(obj1, "a.b.c[3]")); // undefined
+console.log(getValue(obj1, "a.c")); // undefined
