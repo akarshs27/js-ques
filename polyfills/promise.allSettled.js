@@ -22,6 +22,12 @@ const p3 = new Promise((resolve, reject) => {
 //   console.error(err);
 // });
 
+// [
+//   { status: "fulfilled", value: "p2 resolved" },
+//   { status: "fulfilled", value: "p2 resolved" },
+//   { status: "rejected", reason: "p3 reject" },
+// ];
+
 function myPromiseAllSettled(arr) {
   const result = [];
   return new Promise((resolve, reject) => {
