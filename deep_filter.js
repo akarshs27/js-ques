@@ -5,15 +5,15 @@ const obj = {
     c: 5,
     d: -2,
     e: {
-     f: {
-       g: -4,
+      f: {
+        g: -4,
       },
     },
     h: 2,
   },
 };
 
-const filter = (s) =>  s>= 0;
+const filter = (s) => s >= 0;
 
 //Output
 //  {
@@ -25,21 +25,21 @@ const filter = (s) =>  s>= 0;
 //  }
 
 function deepFilter(obj, fn) {
-    for(let key in obj) {
-        let val = obj[key];
-        
-        if(typeof val === 'object') {
-            deepFilter(val, fn);
-        } else {
-            if(filter(val) === false) {
-                delete obj[key];
-            }
-        }
+  for (let key in obj) {
+    let val = obj[key];
 
-        if(JSON.stringify(val) === '{}') {
-            delete obj[key];
-        }
+    if (typeof val === "object") {
+      deepFilter(val, fn);
+    } else {
+      if (fn(val) === false) {
+        delete obj[key];
+      }
     }
+
+    if (JSON.stringify(val) === "{}") {
+      delete obj[key];
+    }
+  }
 }
 
 deepFilter(obj, filter);
