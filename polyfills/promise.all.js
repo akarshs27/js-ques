@@ -25,11 +25,13 @@ nativeP
 
 function myPromiseAll(arr) {
   let result = [];
+  let c = 0;
   return new Promise((resolve, reject) => {
     arr.forEach((ar, index) => {
       ar.then((value) => {
-        result.push(value);
-        if (index === arr.length - 1) {
+        result[index] = value;
+        c++;
+        if (c === arr.length - 1) {
           resolve(result);
         }
       }).catch((err) => {

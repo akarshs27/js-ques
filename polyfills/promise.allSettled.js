@@ -30,22 +30,25 @@ const p3 = new Promise((resolve, reject) => {
 
 function myPromiseAllSettled(arr) {
   const result = [];
+  let c = 0;
   return new Promise((resolve, reject) => {
     arr.forEach((ar, index) => {
       ar.then((value) => {
-        result.push({
+        result[index] = {
           status: "fulfilled",
           value,
-        });
-        if (index === arr.length - 1) {
+        };
+        c++;
+        if (c === arr.length - 1) {
           resolve(result);
         }
       }).catch((err) => {
-        result.push({
+        result[index] = {
           status: "rejected",
           reason: err,
-        });
-        if (index === arr.length - 1) {
+        };
+        c++;
+        if (c === arr.length - 1) {
           resolve(result);
         }
       });
