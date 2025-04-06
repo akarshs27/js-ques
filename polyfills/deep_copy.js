@@ -28,7 +28,7 @@ const arr = [2, 4, [5, 6]];
 // console.log(obj2); { a: { b: null; } }
 
 function deepClone(val) {
-  if (["string", "number", "boolean"].includes(typeof val) || val === null) {
+  if (val === null || typeof val !== "object") {
     return val;
   } else if (Array.isArray(val)) {
     return val.map((el) => deepClone(el));
