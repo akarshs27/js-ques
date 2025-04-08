@@ -11,6 +11,9 @@ const obj2 = { a: 1, b: 2, c: { d: 4 } };
 // const obj2 = { b: 1, a: 2, c: { d: 4 } };
 // console.log(JSON.stringify(obj1) === JSON.stringify(obj2)); false
 
+const arr1 = [1, 2, 3, [4, 5]];
+const arr2 = [1, 2, 3, [4, 5]];
+
 function isObject(value) {
   return value !== null && typeof value === "object";
 }
@@ -40,3 +43,4 @@ function compareObjects(obj1, obj2) {
 }
 
 console.log(compareObjects(obj1, obj2)); // true
+console.log(compareObjects(arr1, arr2)); // true
