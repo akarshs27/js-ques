@@ -1,0 +1,43 @@
+<!-- implement a clearAllTimeout or clearAllInterval function in JavaScript. 
+
+setTimeout returns an id -->
+<script>
+  window.timeOutIds = [];
+
+  const originalSetTimeout = window.setTimeout;
+
+  window.setTimeout = function (fn, delay) {
+    const id = originalSetTimeout(fn, delay);
+    timeOutIds.push(id);
+  };
+
+  window.clearAllTimeout = function () {
+    while (timeOutIds.length) {
+      clearTimeout(timeOutIds.pop());
+    }
+  };
+
+  const timeWrapper = () => {};
+
+  setTimeout(() => {
+    console.log("1");
+  }, [1000]);
+
+  setTimeout(() => {
+    console.log("2");
+  }, [2000]);
+
+  // setTimeout(() => {
+  //   clearAllTimeout(); If it is called here, it will print 1 and 2 as it is running after 2 sec
+  // }, [2500]);
+
+  setTimeout(() => {
+    console.log("3");
+  }, [3000]);
+
+  setTimeout(() => {
+    console.log("4");
+  }, [4000]);
+
+  // clearAllTimeout(); If used here all the timeouts will be cleared before running as they will be in callback queue
+</script>
