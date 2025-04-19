@@ -1,0 +1,66 @@
+<!-- Input:
+<div id="root">
+  <span style="color:#fff;">1</span>
+<span style="color:#eee;">2</span>
+  <span style="color:white;">3</span>
+  <span style="color:rgb(255, 255, 255);">4</span>
+</div>
+
+findElementByColor(document.getElementById('root'), 'rgb(255, 255, 255)');
+
+Output:
+[
+<span style="color:#fff;">1</span>,
+<span style="color:white;">3</span>,
+<span style="color:rgb(255, 255, 255);">4</span>
+] -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root">
+      <span style="color: #fff">1</span>
+      <span style="color: #eee">2</span>
+      <span style="color: white">3</span>
+      <span style="color: rgb(255, 255, 255)">4</span>
+    </div>
+
+    <script>
+      function getComputedColor(elColor) {
+        const div = document.createElement("div");
+        div.style.color = elColor;
+        document.body.appendChild(div);
+        let computedStyles = window.getComputedStyle(div);
+        const { color } = computedStyles;
+        document.body.removeChild(div);
+        return color;
+      }
+
+      function findElementByColor(root, color) {
+        let output = [];
+        const standardColor = getComputedColor(color);
+
+        function searchColor(el) {
+          const elementColor = el.style.color;
+          const elComputedColor = getComputedColor(elementColor);
+          if (elComputedColor == standardColor) {
+            output.push(el);
+          }
+          for (let child of el.children) {
+            searchColor(child);
+          }
+        }
+        searchColor(root);
+        return output;
+      }
+
+      const root = document.getElementById("root");
+      console.log(findElementByColor(root, "white"));
+    </script>
+  </body>
+</html>
