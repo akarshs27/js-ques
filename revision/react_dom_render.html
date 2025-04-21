@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const root = document.getElementById("root");
+      // Input:
+      const json = [
+        {
+          type: "div",
+          props: { id: "hello", class: "foo" },
+          children: [
+            { type: "h1", children: "HELLO" },
+            {
+              type: "p",
+              children: [
+                { type: "span", props: { class: "bar" }, children: "World" },
+              ],
+            },
+          ],
+        },
+      ];
+
+      // JSONtoHTML(json);
+
+      // Output:
+      // <div id="hello" class="foo">
+      //   <h1>HELLO</h1>
+      //   <p>
+      //      <span class="bar">World</span>
+      //   </p>
+      // </div>
+
+      function JSONtoHTML(json) {
+        const fragment = window.document.createDocumentFragment();
+        console.log("fragment", fragment);
+        if (Array.isArray(json)) {
+          for (let el of json) {
+            const element = window.document.createElement(el.type);
+            if (el.props) {
+              for (let key in el.props) {
+                element.setAttribute(key, el.props[key]);
+              }
+            }
+            if (el.children) {
+              for (let child of el.children) {
+                if (typeof child === "string") {
+                  element.appendChild(document.createTextNode(child));
+                } else {
+                  const childElement = JSONtoHTML([child]);
+                }
+              }
+            }
+            fragment.appendChild(element);
+          }
+        }
+
+        root.appendChild(fragment);
+      }
+      JSONtoHTML(json);
+    </script>
+  </body>
+</html>
