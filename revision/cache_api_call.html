@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function cachedApiCall(time) {
+        let cache = {};
+        return async (url, config = {}) => {
+          let key = `${url}-${JSON.stringify(config)}`;
+          if (!cache[key] || Date.now() > cache[key].expiry) {
+            console.log("Making new API call");
+            try {
+              let res = await fetch(url, config);
+              res = await res.json();
+              cache[key] = { value: res, expiry: Date.now() + time };
+            } catch (err) {
+              console.error(err);
+            }
+          } else {
+            console.log("API call from cache");
+          }
+          return cache[key].value;
+        };
+      }
+
+      const call = cachedApiCall(1500);
+
+      // first call
+      // an API call will be made and its response will be cached
+      call("https://jsonplaceholder.typicode.com/todos/1", {}).then((a) =>
+        console.log(a, "1")
+      );
+      //"making new api call"
+      /*
+{
+  "userId": 1,
+  "id": 1,
+  "title": "delectus aut autem",
+  "completed": false
+}
+*/
+
+      // cached response will be returned
+      // it will be quick
+      setTimeout(() => {
+        call("https://jsonplaceholder.typicode.com/todos/1", {}).then((a) =>
+          console.log(a, "2")
+        );
+      }, 700);
+      /*
+{
+  "userId": 1,
+  "id": 1,
+  "title": "delectus aut autem",
+  "completed": false
+}
+*/
+
+      // a fresh API call is made
+      // as time for cached entry is expired
+      setTimeout(() => {
+        call("https://jsonplaceholder.typicode.com/todos/1", {}).then((a) =>
+          console.log(a, "3")
+        );
+      }, 2000);
+      //"making new api call"
+      /*
+{
+  "userId": 1,
+  "id": 1,
+  "title": "delectus aut autem",
+  "completed": false
+}
+*/
+    </script>
+  </body>
+</html>
