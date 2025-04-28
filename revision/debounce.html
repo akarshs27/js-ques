@@ -17,6 +17,7 @@
       const input = document.getElementById("input");
       input.addEventListener("keyup", delayedChange);
 
+      // normal
       function debounce(fn, delay) {
         let timeout;
         return function (...args) {
@@ -28,6 +29,7 @@
         };
       }
 
+      // trailing and leading options
       function debounceWithOptions(
         fn,
         delay,
@@ -55,6 +57,24 @@
           }, delay);
         };
       }
+
+      // useDebounce hook
+      const useDebounce = (fn, delay) => {
+        const timerRef = useRef(null);
+
+        let debounce = useCallback(() => {
+          let context = this;
+          let arguments = args;
+
+          if (timerRef.current) clearTimeout(timerRef.current);
+
+          timerRef.current = setTimeout(() => {
+            fn.apply(context, arguments);
+          }, delay);
+        }, [fn, delay]);
+
+        return debounce;
+      };
     </script>
   </body>
 </html>
