@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="parent">
+      <input type="text" name="a.c" value="1" />
+      <input type="text" name="a.b.d" value="2" />
+      <input type="text" name="a.b.e" value="3" />
+    </form>
+    <script>
+      const inputs = document.querySelectorAll("input");
+      let allInputNames = [];
+      for (let i = 0; i < inputs.length; i++) {
+        const el = {
+          [inputs[i].name]: inputs[i].value,
+        };
+        allInputNames.push(el);
+      }
+      console.log(allInputNames);
+
+      function createObj(allInputNames) {
+        let obj = {};
+      }
+    </script>
+  </body>
+</html>
