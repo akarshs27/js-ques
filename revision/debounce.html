@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" placeholder="Search" id="input" />
+
+    <script>
+      const delayedChange = debounceWithOptions(handleChange, 500);
+
+      function handleChange(e) {
+        console.log(e.target.value);
+      }
+      const input = document.getElementById("input");
+      input.addEventListener("keyup", delayedChange);
+
+      function debounce(fn, delay) {
+        let timeout;
+        return function (...args) {
+          let context = this;
+          if (timeout) clearTimeout(timeout);
+          timeout = setTimeout(() => {
+            fn.apply(context, args);
+          }, delay);
+        };
+      }
+
+      function debounceWithOptions(
+        fn,
+        delay,
+        options = { leading: false, trailing: true }
+      ) {
+        let timeout;
+        let isLeadingInvoked = false;
+
+        return function (...args) {
+          let context = this;
+
+          if (timeout) clearTimeout(timeout);
+
+          if (options.leading && !timeout) {
+            fn.apply(context, args);
+            isLeadingInvoked = true;
+          } else {
+            isLeadingInvoked = false;
+          }
+
+          timeout = setTimeout(() => {
+            if (options.trailing && !isLeadingInvoked) {
+              fn.apply(context, args);
+            }
+          }, delay);
+        };
+      }
+    </script>
+  </body>
+</html>
