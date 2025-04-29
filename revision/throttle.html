@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="button">Click me</button>
+    <script>
+      const button = document.getElementById("button");
+
+      // Counter
+      function counterThrottle(fn, count) {
+        let counter = 0;
+        return function (...args) {
+          if (++counter !== count) return;
+          counter = 0;
+          fn.apply(this, args);
+        };
+      }
+      function handleClick() {
+        console.log("Button clicked");
+      }
+
+      //   const throttledClick = counterThrottle(handleClick, 5);
+
+      // Time
+      function timeThrottle(fn, delay) {
+        let lastRan;
+        let timerId;
+
+        return function (...args) {
+          let context = this;
+
+          if (!lastRan) {
+            fn.apply(context, args);
+            lastRan = Date.now();
+          } else {
+            clearTimeout(timerId);
+            timerId = setTimeout(() => {
+              if (Date.now() - lastRan >= delay) {
+                fn.apply(context, args);
+                lastRan = Date.now();
+              }
+            }, delay - (Date.now() - lastRan));
+          }
+        };
+      }
+
+      const throttledClick = timeThrottle(handleClick, 2000);
+
+      button.addEventListener("click", throttledClick);
+    </script>
+  </body>
+</html>
