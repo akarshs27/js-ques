@@ -51,6 +51,47 @@
       const throttledClick = timeThrottle(handleClick, 2000);
 
       button.addEventListener("click", throttledClick);
+
+      // Throttle Array of tasks.
+      function arrayOfTaskThrottle(array, limit, callback, delay) {
+        let lastRan;
+        let timerId;
+        let queue = [...array];
+
+        return function (...args) {
+          let context = this;
+
+          if (!lastRan) {
+            const ele = queue.splice(0, limit);
+            callback(ele);
+            lastRan = Date.now();
+          } else {
+            clearTimeout(timerId);
+            timerId = setTimeout(() => {
+              if (Date.now() - lastRan >= delay) {
+                const ele = queue.splice(0, limit);
+                callback(ele);
+                lastRan = Date.now();
+              }
+            }, delay - (Date.now() - lastRan));
+          }
+        };
+      }
+
+      button.addEventListener(
+        "click",
+        arrayOfTaskThrottle(
+          [1, 2, 3, 4, 5, 6, 7, 8],
+          2,
+          (tasks) => {
+            console.log(tasks);
+          },
+          1000
+        )
+      );
+      // [1,2]
+      // [3,4]
+      // [5,6]
     </script>
   </body>
 </html>
