@@ -31,7 +31,7 @@
 
 // console.log(mySet); // Set { 1, 2 }
 
-https: function threeSum(arr) {
+function threeSum(arr) {
   let result = new Set();
   let newArr = arr.sort((a, b) => a - b); // [-4, -1, -1, 0, 1, 2]
 
