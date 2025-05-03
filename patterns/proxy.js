@@ -25,7 +25,7 @@ const proxyObj = new Proxy(obj, {
       if (value < 18 || value > 50) {
         console.log("Age value should be between 18 and 50");
       } else {
-        Reflect.set(obj, prop, value); // obj[prop]
+        Reflect.set(obj, prop, value); // obj[prop] = value
       }
     } else {
       Reflect.set(obj, prop, value);
