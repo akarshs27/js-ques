@@ -1,0 +1,18 @@
+
+
+Static Import  - 
+
+Import code that has been exported by another module
+A statically imported module is a module that's imported with the default import keyword.
+
+import module1 from "./module1";
+import module2 from "./module2";
+import module3 from "./module3";
+In this case, module1, module2, and module3 are statically imported.
+
+Pros - 
+Loading instant dependencies: Statically imported components are instantly available to the user
+Optimizations: Statically imported modules can be statically analyzed and tree-shaken.
+
+Cons - 
+Large bundle size: When importing all modules, you might include code that won't be necessary
