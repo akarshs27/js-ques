@@ -24,9 +24,7 @@ function coinChange(coins, amount) {
   for (let coin of coins) {
     for (let i = 0; i < arr.length; i++) {
       if (coin <= i) {
-        let idx = i - coin;
-        let potentialAmount = arr[idx] + 1;
-        arr[i] = Math.min(potentialAmount, arr[i]);
+        arr[i] = Math.min(arr[i], arr[i - coin] + 1);
       }
     }
   }
