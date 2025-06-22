@@ -13,38 +13,34 @@
 // The substring with start index = 1 is "ba", which is an anagram of "ab".
 // The substring with start index = 2 is "ab", which is an anagram of "ab".
 
-function arrayValuesEqual(arr1, arr2) {
-  for (let i = 0; i < arr1.length; i++) {
-    if (arr1[i] !== arr2[i]) return false;
-  }
-  return true;
-}
-
 function findAnagrams(s, p) {
-  const sArr = new Array(26).fill(0);
-  const pArr = new Array(26).fill(0);
-  const result = [];
+  let map = {};
 
-  for (let i = 0; i < p.length; i++) {
-    let index = p.charCodeAt(i) % 26;
-    pArr[index]++;
+  for (let key of p) {
+    map[key] = (map[key] || 0) + 1;
   }
 
-  for (let i = 0; i < s.length; i++) {
-    let index = s.charCodeAt(i) % 26;
-    sArr[index]++;
+  let l = 0;
+  let r = 0;
+  let count = 0;
+  let result = [];
 
-    if (i > p.length - 1) {
-      let headIndex = s.charCodeAt(i - p.length) % 26;
-      sArr[headIndex]--;
-    }
-
-    if (i >= p.length - 1) {
-      if (arrayValuesEqual(sArr, pArr)) {
-        result.push(i - (p.length - 1));
-      }
+  while (r < s.length) {
+    console.log("map 1", map);
+    if (map[s[r]] > 0) count++;
+    map[s[r]]--;
+    console.log("map 2", map);
+    r++;
+    console.log("count", count);
+    if (count === p.length) result.push(l);
+    if (r - l === p.length) {
+      console.log("map 3", map);
+      if (map[s[l]] >= 0) count--;
+      map[s[l]]++;
+      l++;
     }
   }
+
   return result;
 }
 
