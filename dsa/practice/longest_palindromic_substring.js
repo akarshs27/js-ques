@@ -4,27 +4,32 @@
 
 var longestPalindromicSubstrings = function (s) {
   let longest = "";
+
   for (let i = 0; i < s.length; i++) {
-    let left = i;
-    let right = i;
-    // odd
-    let oddPal = helper(left, right);
-    // even
-    let evenPal = helper(left, right + 1);
+    // Try to expand around a single character (odd-length palindrome)
+    let oddPal = expandAroundCenter(i, i);
 
-    let longestPal = oddPal.length > evenPal.length ? oddPal : evenPal;
+    // Try to expand around two characters (even-length palindrome)
+    let evenPal = expandAroundCenter(i, i + 1);
 
-    if (longestPal.length > longest) {
-      longest = longestPal;
-    }
-  }
+    // Pick the longer of the two
+    let longerPal = oddPal.length > evenPal.length ? oddPal : evenPal;
 
-  function helper(left, right) {
-    while (left >= 0 && right < s.length - 1 && s[left] === s[right]) {
-      left++;
-      right--;
+    // Update longest if needed
+    if (longerPal.length > longest.length) {
+      longest = longerPal;
     }
   }
 
   return longest;
+
+  function expandAroundCenter(left, right) {
+    while (left >= 0 && right < s.length && s[left] === s[right]) {
+      left--;
+      right++;
+    }
+
+    // Slice the palindrome from the last valid left+1 to right (not including right)
+    return s.slice(left + 1, right);
+  }
 };
